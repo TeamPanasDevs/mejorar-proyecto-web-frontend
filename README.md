@@ -1,11 +1,12 @@
-# E0 :construction:
+# Mejorar Proyecto Web
 
-- **Nombre Grupo:** Y
+- **Nombre Grupo:** TeamPanasDev
 - **Miembros:**
   - Eduardo Sepúlveda - esep@uc.cl
   - Kael Fernández - kael.fernndez@uc.cl
-  - Jean Fuentes - jhfuentes@uc.cl
-- **Link aplicación:** https://dreamy-dolphin-06cbeb.netlify.app/
+  - Jean Fuentes - jhfuentes@uc.cl (abandona)
+  - Gonzalo Barrueto - gbarrueto@uc.cl
+- **Link aplicación:** https://mejorarproyectoweb.netlify.app
 
 ## Administrador
 
