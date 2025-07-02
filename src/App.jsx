@@ -45,7 +45,7 @@ function App() {
   useEffect(() => {
     // const backendWebSocketURL = "ws://localhost:3000";
     // const backendWebSocketURL = "wss://y-backend-24-2.onrender.com";
-    const backendWebSocketURL = `wss://${backendURL}`;
+    const backendWebSocketURL = `wss://stoncks.me`;
     
     if (!webSocketService.socket || webSocketService.socket.readyState === WebSocket.CLOSED) {
       webSocketService.connect(backendWebSocketURL);
