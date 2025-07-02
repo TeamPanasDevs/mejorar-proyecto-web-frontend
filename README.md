@@ -6,7 +6,7 @@
   - Kael Fernández - kael.fernndez@uc.cl
   - Jean Fuentes - jhfuentes@uc.cl (abandona)
   - Gonzalo Barrueto - gbarrueto@uc.cl
-- **Link aplicación:** https://mejorarproyectoweb.netlify.app
+- **Link aplicación:** https://akingdrez.netlify.app
 
 ## Herramientas
 
