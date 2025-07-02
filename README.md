@@ -8,6 +8,12 @@
   - Gonzalo Barrueto - gbarrueto@uc.cl
 - **Link aplicación:** https://mejorarproyectoweb.netlify.app
 
+## Herramientas
+
+[Yarn](https://classic.yarnpkg.com/en/docs/install#windows-stable) v1.22.22
+[Node](https://nodejs.org/en/download) v21.1.0
+
+
 ## Administrador
 
 - **Rutas administrador:**
