@@ -1,0 +1,56 @@
+
+
+.docs_div {
+  text-align: initial;
+  margin: 2vw;
+}
+
+.docs_div article {
+  font-size: 1vw;
+}
+
+.docs_div ul {
+  list-style-type: none;
+}
+
+.docs_title {
+  text-align: center;
+  margin: 2vw;
+  font-size: 3.5vw;
+}
+
+.head {
+  transition: .2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: .1vw solid black;
+  padding: 1vw;
+}
+.head:hover {
+  cursor: pointer;
+  background-color: #d9d9d9;
+}
+
+.head_button {
+  width: 2vw;
+  height: 2vw;
+  border: none;
+  background: url('https://cdn-icons-png.freepik.com/512/14035/14035161.png');
+  background-position: center;
+  background-size: contain;
+}
+
+.content {
+  margin-left: .2em;
+  margin-right: .2em;
+}
+
+.collapsed {
+  display: none;
+}
+
+.text {
+  padding: 1vw;
+  box-shadow: .1vw 0 1vw -.4vw black;
+}

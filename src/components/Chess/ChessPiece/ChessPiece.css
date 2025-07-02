@@ -1,0 +1,139 @@
+@keyframes idle_animation {
+    to {
+        background-position-x: -600%;
+    }
+}
+
+@keyframes white_king_idle_animation {
+    to {
+        background-position-x: -800%;
+    }
+}
+@keyframes black_king_idle_animation {
+    to {
+        background-position-x: -1000%;
+    }
+}
+@keyframes black_queen_idle_animation {
+    to {
+        background-position-x: -1100%;
+    }
+}
+
+.piece {
+    position: absolute;
+    pointer-events: none; /* Evita interferir con el clic en la casilla */
+    transform: scale(1.05);
+    image-rendering: pixelated;
+    transform: scale(1.1);
+    z-index: 0;
+
+    animation-name: idle_animation;
+    animation-duration: 1s;
+    animation-timing-function: steps(6);
+    animation-iteration-count: infinite;
+}
+.piece.king_white {
+    animation-name: white_king_idle_animation;
+    animation-timing-function: steps(8);
+}
+.piece.king_black {
+    animation-name: black_king_idle_animation;
+    animation-timing-function: steps(10);
+}
+.piece.queen_black {
+    animation-name: black_queen_idle_animation;
+    animation-timing-function: steps(11);
+}
+
+.modal_piece {
+    image-rendering: pixelated;
+    position: relative;                                    /* Cambia el comportamiento según el diseño del modal */
+    transform: scale(1.5);                                 /* Ajusta el tamaño si es necesario */
+    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.5)); /* Ejemplo de estilos únicos */
+}
+
+
+.knight_white {
+    width: 15vw;
+    height: 15vw;
+    background-size: 900% 900%;
+}
+
+.knight_black {
+    width: 15vw;
+    height: 15vw;
+    background-size: 1100% 890%;
+}
+
+.pawn_white {
+    margin-bottom: 0.9vw;
+    background-size: 1100% 870%;
+    width: 18vw;
+    height: 18vw;
+}
+
+.pawn_black {
+    background-size: 800% 620%;
+    width: 20vw;
+    height: 20vw;
+}
+
+.rook_white {
+    background-size: 1200% 760%;
+    width: 18vw;
+    height: 18vw;
+}
+
+.rook_black {
+    background-size: 1100% 750%;
+    width: 18vw;
+    height: 18vw;
+}
+
+.bishop_white {
+    background-size: 1100% 960%;
+    width: 18vw;
+    height: 18vw;
+}
+
+.bishop_black {
+    background-size: 1300% 630%;
+    width: 18vw;
+    height: 18vw;
+}
+
+
+.king_white {
+    margin-bottom: 6.5vw;
+    background-size: 800% 1000%;
+    width: 20vw;
+    height: 11vw;
+    filter: drop-shadow(0.2vw 0.2vw 0 black) drop-shadow(-1px -1px 0 black);
+}
+
+.king_black {
+    background-size: 1000% 900%;
+    width: 19vw;
+    height: 18vw;
+    filter: drop-shadow(0.2vw 0.2vw 0 black) drop-shadow(-1px -1px 0 black);
+    margin-bottom: 1.3vw;
+}
+
+.queen_white {
+    background-size: 1200% 800%;
+    width: 11vw;
+    height: 7vw;
+    margin-left: 2.5vw;
+    margin-bottom: 3vw;
+    filter: drop-shadow(0.1vw 0.2vw 0 black) drop-shadow(-1px 0px 0 black);
+}
+
+.queen_black {
+    background-size: 1100% 800%;
+    width: 16vw;
+    height: 19vw;
+    filter: drop-shadow(0.1vw 0.2vw 0 black) drop-shadow(-1px 0px 0 black);
+    margin-bottom: 2vw;
+    margin-right: 1vw;
+}

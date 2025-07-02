@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.about-us-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.about-us-logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.titulo {
+  color: #3D3C01; 
+  font-size: 5em; 
+  margin: 0.5em 0; 
+}
+
+.about-us-text {
+  text-align: center;
+  max-width: 35em;
+  font-size: 1.8em;
+  line-height: 1.6;
+  color: #3D3C01; 
+}
+
+.profile-cards {
+  display: flex;
+  justify-content: center;
+  gap: 4em;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.profile-card {
+  position: relative;
+  width: 15em;
+  height: 30em;
+  perspective: 1000px;
+}
+
+.profile-card-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d; 
+}
+
+.profile-card-front,
+.profile-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+}
+
+.profile-card-front {
+  background-color: #f0f0f0;
+  color: #3D3C01;
+}
+
+.profile-card-back {
+  background-color: #e0e0e0; 
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-card:hover .profile-card-inner {
+  transform: rotateY(180deg);
+}
+
+.profile-card-front img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1em; 
+}
+
+.profile-card-front h3 {
+  margin: 0.5em 0; 
+}
+
+.profile-card-front p {
+  margin: 0; 
+}
+
+.profile-card-back h3 {
+  color: #3D3C01;
+}
+
+.social-button {
+  padding: 0.5em 1em;
+  background-color: #6A6333; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em; 
+}

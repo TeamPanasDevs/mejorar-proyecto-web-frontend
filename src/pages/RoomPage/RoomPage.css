@@ -1,0 +1,114 @@
+
+.room_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  margin: 4vw;
+  height: 70vh;
+
+  font-size: 3.5vw;
+}
+
+.room_div h1 {
+  margin-bottom: 2vw;
+}
+
+.users_table {
+  width: 90%;
+  min-height: 50%;
+  border-collapse: collapse;
+  box-shadow: 1px 1px .4em 1px black;
+
+  font-size: 2.5vw;
+}
+
+.users_table th {
+  border: 1px solid black;
+  padding: 1vw;
+  background-color: #3d3c01;
+  color: #d9d9d9;
+}
+
+.users_table td {
+  border: 1px solid black;
+  padding: 1.5vw;
+  background-color: #d9d9d9;
+}
+
+.rooms_player_description {
+  width: 50%;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.startgame_button {
+  margin-top: 1.5vw;
+  text-decoration: none;
+  color: black;
+  width: 40%;
+  font-size: .8em;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: #6a6333;
+  animation-name: rotate;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.startgame_button:hover {
+  animation: none;
+  background-color: #9e975f;
+}
+
+.startgame_button:disabled {
+  animation: none;
+  background-color: #c2cbd0;
+  border: none;
+  color: #d9d9d9;
+  cursor: default;
+}
+
+.room_exit_button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1%;
+  font-size: 50%;
+  background-color: #960505;
+  border: none;
+  color: #c2cbd0;
+}
+.room_exit_button:hover {
+  color: #df881b;
+  border: 1px solid #df881b;
+}
+.room_exit_button:active {
+  color: #df881b;
+  border: 1px solid #df881b;
+  transform: scale(.95);
+}
+.room_exit_button:disabled {
+  background-color: #c2cbd0;
+  border: none;
+  color: #d9d9d9;
+  cursor: default;
+}

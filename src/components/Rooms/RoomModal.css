@@ -1,0 +1,93 @@
+
+#rooms {
+  background-color: #c2cbd0;
+  width: 60vw;
+  height: 85vh;
+}
+
+.wrapper_header {
+  width: 100%;
+  height: 15%;
+  position: absolute;
+  top: 0;
+  display: flex;
+}
+
+.rooms_box {
+  width: 100%;
+  height: 85%;
+  align-self: end;
+  overflow-y: scroll;
+  border-top: 1px solid black;
+}
+
+#rooms_close_button {
+  width: 5%;
+  height: 50%;
+  position: relative;
+  top: 0;
+  right: 0;
+  border-radius: 5vw;
+  font-size: 2vw;
+  color: #6a6333;
+  transition: .3s;
+}
+#rooms_close_button:hover {
+  background-color: #960505;
+  color: #d9d9d9;
+}
+
+.create_room {
+  width: 95%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.create_room input {
+  width: 60%;
+  height: 50%;
+  background-color: #6a6333;
+  color: #d9d9d9;
+  border: none;
+  text-align: center;
+  font-size: 1.3vw;
+}
+.create_room input:hover {
+  background-color: #836c6c;
+}
+.create_room input:focus {
+  background-color: #836c6c;
+}
+
+.create_room_button {
+  font-size: 1vw;
+  max-width: 30%;
+  max-height: 50%;
+}
+
+.rooms_message {
+  margin-top: 25%;
+  font-size: 3vw;
+}
+
+@media (max-width: 768px) {
+  .wrapper_header {
+    height: 7%;
+  }
+
+  .rooms_box {
+    height: 93%;
+  }
+}
+
+/* Dispositivos móviles (máximo tablet) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .wrapper_header {
+    height: 10%;
+  }
+
+  .rooms_box {
+    height: 90%;
+  }
+}

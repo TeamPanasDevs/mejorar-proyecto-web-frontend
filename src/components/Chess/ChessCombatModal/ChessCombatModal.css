@@ -1,0 +1,667 @@
+.combat-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+
+  --animation-time: .6s; /* Tiempo de animación en segundos */
+}
+
+.grid-combat-modal {
+  background-color: #eee;
+  background-image: url('../../../../background/mysterious_arena.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows:    repeat(2, 1fr);
+  height: 70%;
+  width: 50%;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 
+* POSICIONES ESPECÍFICAS. 
+*/
+
+.attacker {
+  grid-column: 1 / 2; /* Primera columna */
+  grid-row: 2 / 3;    /* Última fila */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3vw;
+
+  /* justify-content: space-evenly;
+  padding-bottom: 4vw; */
+}
+
+.defender {
+  grid-column: 2 / 3; /* Última columna */
+  grid-row: 1 / 2;    /* Primera fila */
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.actions {
+  grid-column: 2 / 3; /* Última columna */
+  grid-row: 2 / 3;    /* Última fila */
+  flex-direction: column;
+  display: flex;
+  align-items: end;
+  gap: 0.5vw;
+}
+
+/*
+* SPRITES.
+*/
+
+.piece-container {
+  position: relative;
+  display: inline-block;
+  image-rendering: pixelated;
+}
+
+.defender .piece-container {
+  align-self: baseline;
+  margin-left: 20%;
+}
+
+.piece-attacker {
+  transform: scale(6.5);
+  max-height: 5vw;
+  max-width: 5vw;
+  display: block;
+  pointer-events: none;  /* De lo contrario el hover se activará antes */
+}
+
+.piece-container:hover {
+  transform: scale(1.05);
+}
+
+
+/* * * * * Animaciones * * * * * */
+
+@keyframes idle_animation {
+  to {
+      background-position-x: -600%;
+  }
+}
+
+
+@keyframes hit_animation {
+  to {
+    background-position-x: -300%;
+  }
+}
+
+@keyframes black_king_hit_animation {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+
+@keyframes dead_animation {
+  to {
+    background-position-x: -300%;
+  }
+}
+@keyframes white_king_dead_animation {
+  to {
+    background-position-x: -500%;
+  }
+}
+@keyframes black_king_dead_animation {
+  to {
+    background-position-x: -600%;
+  }
+}
+@keyframes queen_dead_animation {
+  to {
+    background-position-x: -1000%;
+  }
+}
+
+
+@keyframes white_pawn_attack {
+  to {
+    background-position-x: -600%;
+  }
+}
+@keyframes black_pawn_attack {
+  to {
+    background-position-x: -500%;
+  }
+}
+@keyframes white_pawn_crit {
+  to {
+    background-position-x: -900%;
+  }
+}
+
+@keyframes white_bishop_attack {
+  to {
+    background-position-x: -600%;
+  }
+}
+@keyframes black_bishop_attack {
+  to {
+    background-position-x: -800%;
+  }
+}
+@keyframes white_bishop_crit {
+  to {
+    background-position-x: -1000%;
+  }
+}
+@keyframes black_bishop_crit {
+  to {
+    background-position-x: -1200%;
+  }
+}
+
+@keyframes white_knight_attack {
+  to {
+    background-position-x: -500%;
+  }
+}
+@keyframes black_knight_attack {
+  to {
+    background-position-x: -800%;
+  }
+}
+@keyframes white_knight_crit {
+  to {
+    background-position-x: -800%;
+  }
+}
+@keyframes black_knight_crit {
+  to {
+    background-position-x: -1000%;
+  }
+}
+
+@keyframes white_rook_attack {
+  to {
+    background-position-x: -800%;
+  }
+}
+@keyframes black_rook_attack {
+  to {
+    background-position-x: -600%;
+  }
+}
+@keyframes white_rook_crit {
+  to {
+    background-position-x: -1100%;
+  }
+}
+@keyframes black_rook_crit {
+  to {
+    background-position-x: -800%;
+  }
+}
+
+@keyframes white_queen_attack {
+  to {
+    background-position-x: -1100%;
+  }
+}
+@keyframes black_queen_attack {
+  to {
+    background-position-x: -600%;
+  }
+}
+@keyframes white_queen_crit {
+  to {
+    background-position-x: -600%;
+  }
+}
+
+@keyframes white_king_attack {
+  to {
+    background-position-x: -300%;
+  }
+}
+@keyframes black_king_attack {
+  to {
+    background-position-x: -600%;
+  }
+}
+@keyframes black_king_crit {
+  to {
+    background-position-x: -700%;
+  }
+}
+
+.idle {
+  background-position: 0 0;
+  animation-name: idle_animation;
+  animation-duration: .8s;
+  animation-timing-function: steps(6);
+  animation-iteration-count: infinite;
+}
+
+.hit_animation {
+  background-position: -0% 199%;
+  animation-name: hit_animation;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(3);
+  animation-iteration-count: 1;
+}
+.hit_animation.king_white_hit_animation {
+  background-position: -0% 200%;
+}
+.hit_animation.king_black_hit_animation {
+  background-position: -0% 200%;
+  animation-name: black_king_hit_animation;
+  animation-timing-function: steps(2);
+}
+.hit_animation.queen_white_hit_animation {
+  background-position: -0% 400%;
+}
+.hit_animation.queen_black_hit_animation {
+  background-position: -0% 200%;
+}
+
+
+.dead_animation {
+  background-position: -0% 100%;
+  animation-name: dead_animation;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(3);
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+.dead_animation.king_white_dead_animation {
+  animation-name: white_king_dead_animation;
+  animation-timing-function: steps(5);
+}
+.dead_animation.king_black_dead_animation {
+  animation-name: black_king_dead_animation;
+  animation-timing-function: steps(6);
+}
+.dead_animation.queen_white_dead_animation {
+  animation-name: queen_dead_animation;
+  animation-timing-function: steps(10);
+}
+.dead_animation.queen_black_dead_animation {
+  animation-name: queen_dead_animation;
+  animation-timing-function: steps(10);
+}
+
+
+.pawn_white_attack_animation {
+  background-position: -0% -198%;
+  animation-name: white_pawn_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(6);
+  animation-iteration-count: 1;
+}
+.pawn_black_attack_animation {
+  background-position: -0% -198%;
+  animation-name: black_pawn_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(5);
+  animation-iteration-count: 1;
+}
+.pawn_white_crit_animation {
+  background-position: -0% -296%;
+  animation-name: white_pawn_crit;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(9);
+  animation-iteration-count: 1;
+}
+.pawn_black_crit_animation {
+  background-position: -0% -299%;
+  animation-name: black_pawn_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(5);
+  animation-iteration-count: 1;
+}
+
+.bishop_white_attack_animation {
+  background-position: -0% -297%;
+  animation-name: white_bishop_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(6);
+  animation-iteration-count: 1;
+}
+.bishop_black_attack_animation {
+  background-position: -0% -198%;
+  animation-name: black_bishop_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(8);
+  animation-iteration-count: 1;
+}
+.bishop_white_crit_animation {
+  background-position: -0% 286%;
+  animation-name: white_bishop_crit;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(10);
+  animation-iteration-count: 1;
+}
+.bishop_black_crit_animation {
+  background-position: -0% -296%;
+  animation-name: black_bishop_crit;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(12);
+  animation-iteration-count: 1;
+}
+
+.knight_white_attack_animation {
+  background-position: -0% -295%;
+  animation-name: white_knight_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(5);
+  animation-iteration-count: 1;
+}
+.knight_black_attack_animation {
+  background-position: -0% -296%;
+  animation-name: black_knight_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(8);
+  animation-iteration-count: 1;
+}
+.knight_white_crit_animation {
+  background-position: -0% -395%;
+  animation-name: white_knight_crit;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(8);
+  animation-iteration-count: 1;
+}
+.knight_black_crit_animation {
+  background-position: -0% -396%;
+  animation-name: black_knight_crit;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(10);
+  animation-iteration-count: 1;
+}
+
+.rook_white_attack_animation {
+  background-position: -0% -197%;
+  animation-name: white_rook_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(8);
+  animation-iteration-count: 1;
+}
+.rook_black_attack_animation {
+  background-position: -0% -198%;
+  animation-name: black_rook_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(6);
+  animation-iteration-count: 1;
+}
+.rook_white_crit_animation {
+  background-position: -0% -397%;
+  animation-name: white_rook_crit;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(11);
+  animation-iteration-count: 1;
+}
+.rook_black_crit_animation {
+  background-position: -0% -398%;
+  animation-name: black_rook_crit;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(8);
+  animation-iteration-count: 1;
+}
+
+.queen_white_attack_animation {
+  background-position: -0% -200%;
+  animation-name: white_queen_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(11);
+  animation-iteration-count: 1;
+}
+.queen_black_attack_animation {
+  background-position: -0% -400%;
+  animation-name: black_queen_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(6);
+  animation-iteration-count: 1;
+}
+.queen_white_crit_animation {
+  background-position: -0% -300%;
+  animation-name: white_queen_crit;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(6);
+  animation-iteration-count: 1;
+}
+.queen_black_crit_animation {
+  background-position: -0% -500%;
+  animation-name: black_queen_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(6);
+  animation-iteration-count: 1;
+}
+
+.king_white_attack_animation {
+  background-position: -0% -600%;
+  animation-name: white_king_attack;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(3);
+  animation-iteration-count: 1;
+}
+.king_black_attack_animation {
+  background-position: -0% -600%;
+  animation-name: black_king_crit;
+  animation-duration: var(--animation-time);
+  animation-timing-function: steps(7);
+  animation-iteration-count: 1;
+}
+
+/* * * * * * * * * * * *  * * * * * * */
+
+/* Mostrar tooltip al hacer hover */
+.piece-container:hover .combat-stats-tooltip {
+  visibility: visible;
+  opacity: 1; /* Aparece */
+  transform: translateY(0); /* Vuelve a su posición normal */
+}
+
+.piece-defender {
+  /* border: 1px #000 solid; */
+  transform: scaleX(-1) scale(4.5);
+  max-height: 5vw;
+  max-width: 5vw;
+  pointer-events: none;
+}
+
+/* CASOS ESPECÍFICOS. */
+
+.piece-container .king_white {
+  filter: drop-shadow(1px .5px .5px black) drop-shadow(0px .5px 2px white);
+  max-height: 5vw;
+  max-width: 5vw;
+  margin-top: 1vw;
+  transform: scale(5) scaleX(-1) translateY(-7%);
+}
+.piece-attacker.king_white {
+  transform: scale(5) translateY(0);
+}
+
+.piece-container .king_black {
+  /* border: 1px #000 solid; */
+  filter: drop-shadow(0 0 1px white) drop-shadow(1px 1px 1px rgb(0, 0, 0));
+  max-height: 5vw;
+  max-width: 5vw;
+  transform: scale(7) rotateY(180deg) translateY(-2%);
+}
+.piece-attacker.king_black {
+  transform: scale(7) rotateY(0);
+}
+
+.piece-container .queen_white {
+  /* transform: scale(3) rotateY(180deg) translateY(-10%); */
+  transform: scale(2.8) rotateY(180deg) translateY(-10%);
+}
+.piece-attacker.queen_white {
+  /* transform: scale(3) rotateY(0) translateY(-10%); */
+  transform: scale(2.8) translateY(-10%);
+}
+
+.piece-container .queen_black {
+  transform: scale(7.5) rotateY(180deg) translateY(-4%);
+  filter: drop-shadow(.8px .5px 0 black) drop-shadow(-0.8px 0px 0 black);
+}
+.piece-attacker.queen_black {
+  transform: scale(7.5) rotateY(0) translateY(0);
+}
+
+/*
+* ESTADÍSTICAS TOOLTIP.
+*/
+.combat-stats-tooltip {
+  position: absolute;
+  width: 9vw;
+  top: -0.5vw;
+  left: 130%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+  color: #fff;   /* Texto blanco */
+  padding: 1vw; /* Espacio interno */
+  border-radius: 1vw; /* Bordes redondeados */
+  font-size: 1vw; /* Texto pequeño */
+  border-collapse: collapse; /* Elimina el espacio entre celdas */
+  table-layout: fixed;   /* Fija el ancho de las columnas */
+  visibility: hidden; /* Oculta inicialmente */
+  opacity: 0; /* Transparente inicialmente */ 
+  transform: translateY(-5vw); /* Ligeramente elevado para animación */
+  transition: opacity 0.2s ease, transform 0.2s ease; /* Suaviza la aparición */
+}
+
+.combat-stats-tooltip td {
+  text-align: left; /* Alinea el texto a la izquierda */
+  padding: 0.5vw;   /* Espacio interno */
+}
+
+/*
+* BOTONES. 
+*/
+
+.combat-button {
+  text-align: start;
+  cursor: pointer;
+  font-size: 1vw;
+  color: #fff;
+  background: linear-gradient(145deg, #000000a7, #333d4630);
+  border-radius: 1vw 0vw 0vw 1vw;
+  border-right: 0;
+  width: 14vw;
+  height: 2.3vw;
+  padding: 0;
+  z-index: 1;
+}
+
+.combat-button:hover {
+  background: linear-gradient(145deg, #00000073, #333d4650);
+  transform: scale(1.02);
+  margin-right: 0.1vw;
+}
+
+/*
+* MENSAJES
+*/
+
+.initial-message-container {
+  background: linear-gradient(145deg, #000000a7, #333d4630);
+  /* border: 0.1vw #000 solid; */
+}
+
+.initial-message-container h2 {
+  font-size: 3vw;
+  color: #fff;
+}
+
+.grid-item h3 {
+  font-size: 1.5vw;
+  margin-bottom: 18px;
+}
+
+.attacker h3 {
+  position: absolute;
+  top: 0;
+}
+
+.defender h3 {
+  margin-bottom: 0;
+  position: absolute;
+  bottom: -10%;
+}
+
+
+
+/* BARRA DE VIDA */
+
+.life {
+  position: absolute;
+  left: 3%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2%;
+}
+
+#defender_life_container {
+  right: 3%;
+  left: unset;
+}
+
+.life p {
+  color: white;
+}
+
+.life_bar {
+  height: 70%;
+  width: 50%;
+  display: flex;
+  align-items: end;
+  padding: 3px;
+  background-color: black;
+}
+
+.life_bar_content {
+  background-color: red;
+  width: 100%;
+  /* height: Especificado según la vida de la pieza; */
+  display: block;
+}
+
+.combat-message-temp {
+  position: absolute;
+  top: 23%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.5vw;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 1.2vw;
+  border-radius: 10px;
+  opacity: 1;
+  transition: opacity 1s ease-out;
+  z-index: 9999;
+}
+
+.combat-message-temp p {
+  margin: 0;
+}
+
+/* ... */

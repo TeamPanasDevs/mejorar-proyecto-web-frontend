@@ -1,0 +1,90 @@
+.container-mainpage {
+    /* display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 2rem; */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .initial-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 48vh;
+    font-size: 2vw;
+  }
+  
+  .principal-block {
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    padding-top: 20px;
+    gap: 5vw;
+  }
+  
+  aside {
+    display: flex;
+    min-height: 100vh;
+    width: 20%;
+    flex-direction: column;
+    background-color: #1B5B04;
+    border-radius: 30px;
+    font-size: 1.5vw;
+    padding-top: 2vh;
+  }
+  
+  .grid-card {
+    display: grid;
+    grid-template-columns: repeat(2 , 1fr);
+    gap: 5vh;
+    align-content: start;
+  }
+  
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .button {
+    transition: .3s;
+    width: 15em;
+    height: 3.5em;
+  
+    color: #d9d9d9;
+    font-size: 1.5vw;
+    border: none;
+    background-color: #6A6333;
+    box-shadow: 4px 5px 5px #3d3c01;
+  }
+  .button:hover {
+    transform: scale(1.1) translateX(-0.8em);
+    background-color: #9e975f;
+  }
+  .button:active {
+    transform: scale(1);
+    background-color: #6A6333;
+  }
+  .button:disabled {
+    color: #e9e9e9;
+    border: none;
+    transform: scale(1) translateX(.4em);
+    background-color: #C2CBD0;
+    box-shadow: none;
+  }
+  
+  
+  @media (max-width: 1023px) {
+    .grid-card {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .grid-card {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+  }

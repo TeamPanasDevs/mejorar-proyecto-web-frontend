@@ -1,0 +1,81 @@
+.chess-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Para manejar capas con ::before o sombras */
+  border: 1px solid #000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animaciones suaves */
+}
+
+.chess-square.light {
+  background-color: #f3e5d0; /* Color más claro */
+}
+
+.chess-square.dark {
+  background-color: #b87b4f; /* Color más cálido */
+}
+
+.chess-square.highlighted {
+  position: relative;
+}
+
+.chess-square.highlighted::before {
+  content: '';
+  position: absolute;
+  inset: 0; /* Llenar toda la casilla */
+  background: rgba(50, 200, 50, 0.4); /* Verde semitransparente */
+  border: 2px dashed rgba(50, 200, 50, 0.8); /* Borde llamativo */
+  border-radius: 8px;
+  z-index: 0; /* Debajo de la pieza */
+  pointer-events: none;
+}
+
+.chess-square.capture-highlighted::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 80, 80, 0.4); /* Rojo semitransparente */
+  border: 2px solid rgba(255, 80, 80, 0.8);
+  border-radius: 8px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.chess-square:hover {
+  outline: 1px solid #ff0; /* Hover resaltado */
+  transform: scale(1.05); /* Ligero efecto de zoom */
+}
+
+.chess-square.selected {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 166, 255, 0.4),
+    rgba(0, 166, 255, 0.2)
+  );
+  box-shadow: 0 0 10px 2px rgba(0, 166, 255, 0.6);
+  border: 2px solid rgba(0, 166, 255, 0.8);
+  transform: scale(1.1); /* Más destacado al seleccionar */
+  z-index: 1;
+}
+
+.chess-square.castle-highlighted::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 255, 255, 0.3); /* Azul claro para el enroque */
+  border: 2px dotted rgba(0, 255, 255, 0.8);
+  border-radius: 8px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.piece {
+  z-index: 2;                      /* Asegurar que las piezas estén por encima */
+  will-change: transform;          /* Preparar para transformaciones */
+  image-rendering: pixelated;
+  transition: transform 0.2s ease;
+}
+
+.chess-square:hover .piece {
+  transform: scale(1.1);           /* Efecto al pasar el cursor sobre una casilla con pieza */
+}

@@ -1,0 +1,21 @@
+
+.gamepage_div {
+  display: flex;
+  flex-direction: column;
+  max-width: 70vw;
+  margin: 4vw auto;
+  font-size: 5vw;
+}
+
+.user_div {
+  margin: 1.2em 0;
+  font-style: italic;
+}
+
+#user_enemy {
+  align-self: first baseline;
+}
+
+#user_you {
+  align-self: last baseline;
+}

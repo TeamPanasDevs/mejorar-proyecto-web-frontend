@@ -1,0 +1,10 @@
+[
+    ["w", "knight", "b1"], ["w", "knight", "g1"], ["w", "rook", "a1"], ["w", "rook", "h1"],
+    ["w", "bishop", "c1"], ["w", "bishop", "f1"], ["w", "king", "e1"], ["w", "queen", "d1"],
+    ["w", "pawn", "a2"],   ["w", "pawn", "b2"],   ["w", "pawn", "c2"], ["w", "pawn", "d2"],
+    ["w", "pawn", "e2"],   ["w", "pawn", "f2"],   ["w", "pawn", "g2"], ["w", "pawn", "h2"],
+    ["b", "knight", "b8"], ["b", "knight", "g8"], ["b", "rook", "a8"], ["b", "rook", "h8"],
+    ["b", "bishop", "c8"], ["b", "bishop", "f8"], ["b", "king", "e8"], ["b", "queen", "d8"],
+    ["b", "pawn", "a7"],   ["b", "pawn", "b7"],   ["b", "pawn", "c7"], ["b", "pawn", "d7"],
+    ["b", "pawn", "e7"],   ["b", "pawn", "f7"],   ["b", "pawn", "g7"], ["b", "pawn", "h7"]
+]

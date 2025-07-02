@@ -1,0 +1,98 @@
+.chessboard {
+  position: relative; /* Asegúrate de que sea relativo */
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);          /* 8 columnas uniformes */
+  grid-template-rows: repeat(8, 1fr);            /* 8 filas uniformes */
+  gap: 0.5%;                                     /* Espaciado entre casillas */
+  max-width: 40vw;                               /* Tamaño máximo del tablero */
+  aspect-ratio: 1 / 1;                           /* Mantener la proporción cuadrada */
+  border: 1px solid #000;                        /* Bordes del tablero */
+  background-size: calc(5vw * 2) calc(5vw * 2);
+  box-sizing: border-box;                        /* Incluye bordes en el cálculo del tamaño */
+}
+
+.popup-message {
+  min-width: 100%;
+  max-height: 100%;
+  position: absolute; /* Centrado relativo al tablero */
+  top: 50%;           /* Centrado vertical */
+  left: 50%;          /* Centrado horizontal */
+  transform: translate(-50%, -50%); /* Ajustar el centrado */
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente */
+  color: white;
+  border-radius: 5px;
+  font-size: 2vw;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+  z-index: 100; /* Asegurarse de estar por encima del tablero */
+  opacity: 1;
+  animation: fadeOut 2.5s forwards; /* Animación para desvanecerse */
+}
+
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.frame {
+  display: grid;
+  grid-template-areas: 
+    "top top top"
+    "left center right"
+    "bottom bottom bottom";
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border: 1px solid #000;
+  width: calc(40vw + 10vw);
+  height: calc(40vw + 10vw);
+  background: #C2CBD0;
+  font-size: 1vw;
+}
+
+.end {
+  font-size: 0.8vw;
+  text-align: center;
+}
+
+.end.top, 
+.end.bottom {
+  grid-area: top;
+  align-self: end;
+  letter-spacing: calc(5vw * 0.45);
+  padding-left: 2vw;
+}
+
+.end.left, 
+.end.right {
+  grid-area: left;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  letter-spacing: calc(5vw * 0.3);
+  padding: 0 1vw;
+  padding-top: 2vw;
+  align-self: center;
+}
+
+.end.left {
+  grid-area: left;
+}
+
+.end.right {
+  grid-area: right;
+}
+
+.end.bottom {
+  grid-area: center;
+}
+
+.chessboard {
+  grid-area: center;
+  align-self: center;
+}

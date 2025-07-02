@@ -1,0 +1,21 @@
+
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin: 1vw;
+}
+
+.unique_skill {
+  padding: 1vw;
+  background-color: #c2cbd0;
+}
+
+.skill_title {
+  display: flex;
+}
+
+.skill_description {
+  margin: 1vw;
+}
