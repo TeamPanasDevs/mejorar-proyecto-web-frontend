@@ -1,4 +1,4 @@
-
+import React from 'react';
 import './GuidePage.css'
 import '../Documentation.css'
 import { themeClicked } from '../Functions'

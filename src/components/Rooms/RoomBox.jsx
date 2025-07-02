@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import './RoomBox.css';
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { PathsContext } from "../../App";
 import webSocketService from "../../services/WebSocketService"; // Importa el servicio WebSocket

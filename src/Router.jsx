@@ -9,7 +9,7 @@ import RoomPage from './pages/RoomPage/RoomPage';
 import RulesPage from './pages/Documentation/RulesPage/RulesPage';
 import AboutUsPage from './pages/AboutUsPage/AboutUsPage';
 import GuidePage from './pages/Documentation/GuidePage/GuidePage';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { PathsContext } from './App';
 import AdministratorLogin from './pages/Administrator/AdministratorLogin/AdministratorLogin';
 

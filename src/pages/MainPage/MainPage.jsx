@@ -3,7 +3,7 @@ import './MainPage.css';
 import Logo from '../../../assets/Logo.jpg';  // Importa la imagen
 import { SessionContext } from '../../App';
 import GridCards from '../../components/Landing/GridCards';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import RoomModal from '../../components/Rooms/RoomModal';
 
 const MainPage = () => {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../AdministratorStyle.css'
 import Players from '../../../components/Administrator/Players';
 import Rooms from '../../../components/Administrator/Rooms';

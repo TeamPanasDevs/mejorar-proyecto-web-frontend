@@ -1,3 +1,4 @@
+import React from 'react';
 import './GridCards.css';
 import FlipCard from '../FlipCard/FlipCard';
 import pieces_description from '../../PiecesDescription';

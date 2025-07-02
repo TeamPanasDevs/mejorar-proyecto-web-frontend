@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import './RoomPage.css'
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { DisplayNavContext, PathsContext } from '../../App';
 import WebSocketService from '../../services/WebSocketService'; 

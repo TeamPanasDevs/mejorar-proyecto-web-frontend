@@ -1,3 +1,4 @@
+import React from "react";
 
 const pieces_description = [
     [0, <p>

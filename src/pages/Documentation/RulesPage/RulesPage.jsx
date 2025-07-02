@@ -1,3 +1,4 @@
+import React from 'react';
 import './RulesPage.css'
 import '../Documentation.css'
 import { themeClicked } from '../Functions';

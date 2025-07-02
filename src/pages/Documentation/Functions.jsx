@@ -1,3 +1,4 @@
+import React from 'react';
 
 export function themeClicked(id) {
   const content = document.getElementById(id);
