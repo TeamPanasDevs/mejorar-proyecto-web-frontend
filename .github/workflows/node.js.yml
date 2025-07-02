@@ -8,6 +8,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+
     steps:
       - name: Repository Checkout
         uses: actions/checkout@v4
@@ -18,17 +19,16 @@ jobs:
           node-version: 20
           cache: "npm"
 
-      - name: Install Netlify
-        run: yarn add netlify-cli
-
       - name: Install Dependencies
         run: yarn install
+
+      - name: Install Netlify CLI globally
+        run: npm install -g netlify-cli
 
       - name: Build project
         run: yarn build
 
       - name: Deploy to Netlify
-        id: netlify_deploy
         run: |
           netlify deploy --prod \
             --dir dist \
