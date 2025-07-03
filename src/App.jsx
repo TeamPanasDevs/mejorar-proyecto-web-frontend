@@ -19,7 +19,7 @@ const loginPath = '/login';
 const registerPath = '/register';
 const gamePath = '/games/:id';
 const roomPath = '/rooms/:id';
-const backendURL = 'https://stoncks.me';
+const backendURL = 'https://www.stoncks.me';
 // const backendURL = 'http://localhost:3000';
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
   useEffect(() => {
     // const backendWebSocketURL = "ws://localhost:3000";
     // const backendWebSocketURL = "wss://y-backend-24-2.onrender.com";
-    const backendWebSocketURL = `wss://stoncks.me`;
+    const backendWebSocketURL = `wss://www.stoncks.me`;
     
     if (!webSocketService.socket || webSocketService.socket.readyState === WebSocket.CLOSED) {
       webSocketService.connect(backendWebSocketURL);
