@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from "react";
-import './App.css'
 import Navbar from './components/navbar/Navbar'
 import Router from './Router'
 import AuthProvider from '../auth/AuthProvider'
@@ -90,7 +89,6 @@ function App() {
         }}>
           <DisplayNavContext.Provider value={{ displayNavbar, setDisplayNavbar }}>
             <>
-              <Navbar />
               <Router />
             </>
           </DisplayNavContext.Provider>

@@ -1,34 +1,90 @@
-/* :root { */
-  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
-  /* line-height: 1.5; */
-  /* font-weight: 400; */
+:root {
+  /*
+  line-height: 1.5;
+  font-weight: 400;
+  
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 
-  /* color-scheme: light dark; */
-  /* color: rgba(255, 255, 255, 0.87); */
-  /* background-color: #242424; */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  */
 
-  /* font-synthesis: none; */
-  /* text-rendering: optimizeLegibility; */
-  /* -webkit-font-smoothing: antialiased; */
-  /* -moz-osx-font-smoothing: grayscale; */
-/* } */
+  /* COLORS */
+  --main-color-1: #3f425c;
+  --secondary-color-1-1: #555B8D;
+  --secondary-color-1-2: #7680D0;
+  --light-color-1: #97A2FF;
 
-/* a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  --main-color-2: #504b47;
+  --secondary-color-2-1: #817A74;
+  --secondary-color-2-2: #AEA69F;
+  --light-color-2: #DDD6D0;
+
+  --main-color-3: #4b3621;
+  --secondary-color-3-1: #6E471F;
+  --secondary-color-3-2: #AA7139;
+  --secondary-color-3-3: #FFA952;
+  --light-color-3: #FFD2A4;
+
+  /* FONT */
+  --main-font: "Irish Grover", "MedievalSharp", "Modern Antiqua", "Oldenburg", serif;
+
+  /* IMAGES */
+  --mainpage-home-background: url('/background/mainpage_home.png');
+  --black_team_background: url('/background/black.png');
+  --white_team_background: url('/background/white.png');
+
+  --logo: url(/logo.jpg);
+
+  --pieces-static: url('/pieces/single_pieces.png');
+
+  --pieces-b-king: url('/pieces/black_king.png');
+  --pieces-b-queen: url('/pieces/black_queen.png');
+  --pieces-b-bishop: url('/pieces/black_bishop.png');
+  --pieces-b-knight: url('/pieces/black_knight.png');
+  --pieces-b-rook: url('/pieces/black_rook.png');
+  --pieces-b-pawn: url('/pieces/black_pawn.png');
+
+  --pieces-w-king: url('/pieces/white_king.png');
+  --pieces-w-queen: url('/pieces/white_queen.png');
+  --pieces-w-bishop: url('/pieces/white_bishop.png');
+  --pieces-w-knight: url('/pieces/white_knight.png');
+  --pieces-w-rook: url('/pieces/white_rook.png');
+  --pieces-w-pawn: url('/pieces/white_pawn.png');
+
+
+  font-family: var(--main-font);
 }
-a:hover {
-  color: #535bf2;
-} */
 
 body {
-  /* margin: 0; */
-  /* display: flex; */
-  /* place-items: center; */
-  min-width: 320px;
-  min-height: 100vh;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: var(--mainpage-home-background);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
 }
+
+#root {
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/*
+a:hover {
+  color: #535bf2;
+}
+*/
+
 
 /* h1 {
   font-size: 3.2em;

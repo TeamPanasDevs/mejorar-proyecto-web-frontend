@@ -6,126 +6,37 @@ import LoginModal from "../LoginRegister/Login";
 import { DisplayNavContext, PathsContext, SessionContext } from "../../App";
 import { AuthContext } from "../../../auth/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { LuUserRound } from "react-icons/lu";
 
 
-const Navbar = () => {
-  const {
-    userConnected,
-    setUserConnected,
-    isRegisterOpen,
-    openRegisterModal,
-    closeRegisterModal,
-    isLoginOpen,
-    openLoginModal,
-    closeLoginModal
-  } = useContext(SessionContext)
-  const {
-    displayNavbar
-  } = useContext(DisplayNavContext);
 
-  const {
-    mainPagePath,
-    aboutUsPath,
-    rulesPath,
-    guidePath,
-  } = useContext(PathsContext);
-
-  const navigate = useNavigate();
-
-  const [showMenuContent, setShowMenuContent] = useState(false);
-  const [selectedClass, setSelectedClass] = useState(null);
-
-  const {logout} = useContext(AuthContext);
-  const [msg, setMsg] = useState("");
-
-  function toggleMenu() {
-    if (!showMenuContent) setSelectedClass('selected');
-    else setSelectedClass(null);
-    setShowMenuContent(!showMenuContent);
-  }
-
-  const handleLogout = () => {
-    logout();
-    setUserConnected(false);
-
-    localStorage.removeItem("player_id");
-    localStorage.removeItem("admin_id");
-
-    setMsg("Has hecho logout con éxito");
-    navigate(mainPagePath);
-  }
-
+const Navbar = ({ effect }) => {
   return (
-    displayNavbar ? (
-      <nav className="navbar">
+    <nav className={`${effect}-nav`}>
 
-        <Link to={mainPagePath} className="logo">
-          <img className="icon" src={gameLogo} />
-          <p className="title">AKingDrez</p>
-        </Link>
+      {/* Background */}
+      <div className={`${effect}`}></div>
 
-          <ul className="links">
-            <li className="link-item"><Link to={aboutUsPath} className="page-link">Nosotros</Link></li>
-            <li className="link-item dropdown">
-              <a className="page-link">Documentación</a>
-              <div className="dropdown_content">
-                <Link to={rulesPath} className="page-link">Reglas</Link>
-                <Link to={guidePath} className="page-link">Guia</Link>
-              </div>
-            </li>
-            <li className="link-item"><Link to={mainPagePath} className="page-link">Página principal</Link></li>
-            { !userConnected ? (
-              <>
-                <li className="link-item"><button onClick={openRegisterModal} className="page-link">Registrarse</button></li>
-                <li className="link-item"><button onClick={openLoginModal} className="page-link">Iniciar sesión</button></li>
-              </>
-              ) : 
-              <>
-                <li className="link-item"><button onClick={handleLogout} className="page-link">Desconectarse</button></li>
-              </>
-            }
-          </ul>
-          
-          {/* Menu button for tablets and mobiles */}
-          <div className="dropdown_menu">
-            {showMenuContent ? (
-              <div className="dropdown_menu_content">
-                <Link to={aboutUsPath} className="page-link">Nosotros</Link>
-                <Link to={rulesPath} className="page-link">Reglas</Link>
-                <Link to={guidePath} className="page-link">Guia</Link>
-                <Link to={mainPagePath} className="page-link">Página principal</Link>
-                { !userConnected ? (
-                  <>
-                    <button onClick={openRegisterModal} className="page-link">Registrarse</button>
-                    <button onClick={openLoginModal} className="page-link">Iniciar sesión</button>
-                  </>
-                  ) : 
-                  <>
-                    <a onClick={handleLogout} className="page-link">Desconectarse</a>
-                  </>
-                }
-              </div>
-            ) : null}
-            <button className={`menu_button ${selectedClass}`} onClick={toggleMenu}></button>
-          </div>
+      {/* Logo */}
+      <div className="logoContainer">
+        <img className="logoImage" />
+        <p className="gameTitle">AKingDrez</p>
+      </div>
 
+      {/* Central Button */}
+      <div className="buttonsContainer">
+        <Link to={'/rooms'}>Salas</Link>
+        <Link to={'/docs/rules'}>¿Cómo Jugar?</Link>
+      </div>
 
-        <div>
-          <RegisterModal 
-            isOpen={isRegisterOpen} 
-            closeModal={closeRegisterModal} 
-            openLoginModal={openLoginModal} 
-          />
-          <LoginModal 
-            isOpen={isLoginOpen} 
-            closeModal={closeLoginModal} 
-            openRegisterModal={openRegisterModal} 
-          />
-        </div>
+      {/* User */}
+      <div className="userContainer">
+        <p className="userName">Usuario</p>
+        <LuUserRound />
+      </div>
 
-      </nav>
-    ) : null
-  );
+    </nav>
+  )
 }
 
 export default Navbar;

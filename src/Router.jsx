@@ -38,8 +38,8 @@ function Router(){
       <Route path={registerPath}  element={ <Register /> }    />
       <Route path={gamePath}      element={ <GamePage /> }    />
       <Route path={roomPath}      element={ <RoomPage /> }    />
-      <Route path={rulesPath}     element={ <RulesPage /> }   />
-      <Route path={guidePath}     element={ <GuidePage /> }   />
+      <Route path='/docs/rules'     element={ <RulesPage /> }   />
+      <Route path='/docs/guides'     element={ <GuidePage /> }   />
       <Route path={aboutUsPath}   element={ <AboutUsPage /> } />
     </Routes>
   )
