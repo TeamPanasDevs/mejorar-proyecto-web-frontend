@@ -14,9 +14,6 @@ const Navbar = ({ effect }) => {
   return (
     <nav className={`${effect}-nav`}>
 
-      {/* Background */}
-      <div className={`${effect}`}></div>
-
       {/* Logo */}
       <div className="logoContainer">
         <img className="logoImage" />

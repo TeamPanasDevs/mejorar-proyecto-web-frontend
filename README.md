@@ -211,3 +211,9 @@ Esta casilla luego de ser utilizada por la pieza se consume y se convierte en un
 <!-- Insertamos la imagen logo.png -->
 ![ER-Model](assets/Logo.jpg)
 
+
+
+## Referencias
+
+- Scroll por sección (pages/MainPage/MainPage.css): https://codepen.io/ellie_html/pen/dyYjZyB
+
