@@ -1,5 +1,5 @@
 import { playSelectionSound, playCaptureSound } from '../../../utils/soundPieces';
-import { messageAlertAndMovement } from './utils';
+import { messageAlertAndMovement } from './utilsAlerts';
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useAsyncError, useNavigate } from "react-router-dom";
 import CombatModal from '../ChessCombatModal/ChessCombatModal';
