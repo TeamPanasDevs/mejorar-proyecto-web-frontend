@@ -22,8 +22,8 @@ const Navbar = ({ effect }) => {
 
       {/* Central Button */}
       <div className="buttonsContainer">
-        <Link to={'/rooms'}>Salas</Link>
-        <Link to={'/docs/rules'}>¿Cómo Jugar?</Link>
+        <Link className="styleHover" to={'/rooms'}>Salas</Link>
+        <Link className="styleHover" to={'/docs/rules'}>¿Cómo Jugar?</Link>
       </div>
 
       {/* User */}
