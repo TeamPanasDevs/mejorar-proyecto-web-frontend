@@ -1,8 +1,43 @@
 .home {
   width: 100%;
   height: 100%;
+
+  align-content: center;
+  text-align: center;
+
   background: var(--mainpage-home-background);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
+}
+
+.titleBar {
+  display: flex;
+
+  width: 100%;
+
+  justify-content: center;
+
+  background-color: rgb(from var(--secondary-color-3-3) r g b / 0.8);
+  box-shadow: 0 0 1em 1em rgb(from var(--secondary-color-3-3) r g b / 0.8); /* x y blur spread */
+
+  transform: translateY(-200%);
+}
+
+.titleBar h1 {
+  width: 30%;
+}
+
+.home button {
+  font: inherit;
+  border-radius: 2em;
+  padding: 1em 3em;
+  background-color: var(--main-color-3);
+  color: var(--secondary-color-3-3);
+  border: none;
+  transition: .2s ease-in-out;
+}
+
+.home button:hover {
+  background-color: var(--secondary-color-3-1);
 }

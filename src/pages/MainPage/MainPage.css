@@ -6,6 +6,6 @@
   scroll-snap-type: y mandatory;
 }
 
-.mainCarrusel div {
+.mainCarrusel > div {
   scroll-snap-align: start;
 }
