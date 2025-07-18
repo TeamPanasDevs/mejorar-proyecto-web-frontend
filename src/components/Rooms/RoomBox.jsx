@@ -6,22 +6,19 @@ import { PathsContext } from "../../App";
 import webSocketService from "../../services/WebSocketService"; // Importa el servicio WebSocket
 
 const RoomBox = ({ room_data }) => {
-  const { backendURL } = useContext(PathsContext);
-  const [player1, setPlayer1] = useState(null);
-  const [player2, setPlayer2] = useState(null);
-  const [player1Loaded, setPlayer1Loaded] = useState(false);
-  const [player2Loaded, setPlayer2Loaded] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-
+  
   const navigate = useNavigate();
+
+  const { backendURL } = useContext(PathsContext);
+  const [player1, setPlayer1] = useState(null);                 // Estado para almacenar los datos del jugador 1.
+  const [player2, setPlayer2] = useState(null);                 // Estado para almacenar los datos del jugador 2.
+  const [player1Loaded, setPlayer1Loaded] = useState(false);    // Estado para indicar si el jugador 1 ha sido cargado.
+  const [player2Loaded, setPlayer2Loaded] = useState(false);    // Estado para indicar si el jugador 2 ha sido cargado.
+  const [buttonDisabled, setButtonDisabled] = useState(false);  // Estado para deshabilitar el botón de unirse.
 
   const token = localStorage.getItem('token');
   const current_player_id = localStorage.getItem('player_id');
-  const request_config = {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  };
+  const request_config = { headers: { Authorization: `Bearer ${token}` } };
 
   async function joinRoom() {
     try {
@@ -31,7 +28,7 @@ const RoomBox = ({ room_data }) => {
       }, request_config);
   
       if (response.status === 200) {
-        // Enviar mensaje de WebSocket informando que el jugador se unió
+        // Enviar mensaje de WebSocket informando que el jugador 2 se unió.
         webSocketService.send('joinRoom', {
           playerId: current_player_id, // ID del jugador
           roomId: room_data.id,        // ID de la sala
