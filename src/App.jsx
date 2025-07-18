@@ -4,6 +4,7 @@ import Navbar from './components/navbar/Navbar'
 import Router from './Router'
 import AuthProvider from '../auth/AuthProvider'
 import webSocketService from './services/WebSocketService'; // Asegúrate de importar tu WebSocketService
+import { WebSocketProvider } from "./hooks/WebSocketContext";
 
 export const SessionContext = createContext(null);
 export const PathsContext = createContext(null);
@@ -91,7 +92,9 @@ function App() {
           <DisplayNavContext.Provider value={{ displayNavbar, setDisplayNavbar }}>
             <>
               <Navbar />
-              <Router />
+              <WebSocketProvider>
+                <Router />
+              </WebSocketProvider>
             </>
           </DisplayNavContext.Provider>
         </PathsContext.Provider>
