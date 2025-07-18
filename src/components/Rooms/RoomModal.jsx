@@ -14,11 +14,7 @@ const RoomModal = ({ isOpen, closeModal }) => {
 
   const token = localStorage.getItem('token');
   const current_player_id = localStorage.getItem('player_id');
-  const request_config = {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  };
+  const request_config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [rooms, setRooms] = useState([]);
   const [roomsLoaded, setRoomsLoaded] = useState(false);
