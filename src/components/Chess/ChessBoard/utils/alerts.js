@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { playCaptureSound, playDefeatSound } from '../../../utils/soundPieces';
+import { playCaptureSound, playDefeatSound } from '../../../../utils/soundPieces';
 import Swal from "sweetalert2";
 
 export const messageAlertAndMovement = (backendURL, targetPiece, selectedPiece, board, selectedRow, selectedCol, row, col, 
