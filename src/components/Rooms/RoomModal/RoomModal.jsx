@@ -14,43 +14,46 @@ import { useFetchRooms } from '../../../api/queries/room';
 import { useCreateRoom } from '../../../api/mutations/room';
 import { useWebSocket } from '../../../hooks/WebSocketContext';
 import { PathsContext } from '../../../App';
+import { FaRegPaperPlane } from 'react-icons/fa';
 
 const RoomModal = ({ isOpen, closeModal }) => {
   if (!isOpen) return null;
 
+  /* Hooks.  */
   const [roomTitle, setRoomTitle] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState('');         
 
+  /* useContext, useQueryClient and useNavigate. */
   const { token, currentPlayerId } = useAuthInfo();
   const { backendURL: url } = useContext(PathsContext);
-  const socket = useWebSocket();
   const navigate = useNavigate();
+  const socket = useWebSocket();
   const queryClient = useQueryClient();
 
+  /* TanStack React Query. */
   const { data: rooms = [], isLoading, isError } = useFetchRooms({ url, token });
   const { mutate: createRoom } = useCreateRoom({ url, token, current_player_id: currentPlayerId });
 
+  /* useEffects.  */
   useRoomSocketListeners(socket, queryClient);
+  validateRoomTitle(roomTitle, rooms, setError);
 
+  /* Handlers. */
   const handleCreateRoom = () => {
-    const validationError = validateRoomTitle(roomTitle, rooms);
-    if (validationError) return setError(validationError);
-
-    createRoom(
-      { title: roomTitle },
-      {
-        onSuccess: (data) => {
-          setError('');
-          navigate(`/rooms/${data.id}`);
-        },
-        onError: (err) => {
-          console.error('Error al crear Room:', err);
-          setError('Hubo un error al crear la sala');
-        },
-      }
-    );
+    createRoom({ title: roomTitle }, {
+      onSuccess: (data) => { 
+        setError(''); 
+        navigate(`/rooms/${data.id}`);
+      },
+      onError: (err) => {
+        console.error('Error al crear Room:', err);
+        setError('Hubo un error al crear la sala');
+      }, 
+    });
   };
 
+
+  /* .jsx */
   return (
     <div className="modal-overlay">
       <section className="wrapper" id="rooms">
@@ -62,7 +65,11 @@ const RoomModal = ({ isOpen, closeModal }) => {
               value={roomTitle}
               onChange={(e) => setRoomTitle(e.target.value)}
             />
-            <button className="button create_room_button" onClick={handleCreateRoom}>
+            <button 
+              className="button create_room_button" 
+              onClick={handleCreateRoom}
+              disabled={!!error || roomTitle.trim() === ''}
+            >
               Crear sala
             </button>
           </div>
