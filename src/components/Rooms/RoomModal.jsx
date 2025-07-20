@@ -1,65 +1,61 @@
+import React, { useContext, useEffect, useState } from 'react';
+import './RoomModal.css';
 import axios from 'axios';
 import RoomBox from './RoomBox';
-import './RoomModal.css';
-import { useNavigate } from 'react-router-dom';
-import React, { useContext, useEffect, useState } from 'react';
+import webSocketService from '../../services/WebSocketService';
+
+// Componentes y similares.
 import { PathsContext } from '../../App';
-import webSocketService from '../../services/WebSocketService'; // Importa el servicio WebSocket
+import { useNavigate } from 'react-router-dom';
+import { useWebSocket } from '../../hooks/WebSocketContext';
+
+// Hooks y base de datos.
+import { useCreateRoom } from '../../api/mutations/room';
+import { useFetchRooms } from '../../api/queries/room';
 
 const RoomModal = ({ isOpen, closeModal }) => {
   if (!isOpen) return null;
-
-  const { backendURL } = useContext(PathsContext);
-  const navigate = useNavigate();
-
+  
   const token = localStorage.getItem('token');
   const current_player_id = localStorage.getItem('player_id');
-  const request_config = { headers: { Authorization: `Bearer ${token}` } };
 
-  const [rooms, setRooms] = useState([]);
-  const [roomsLoaded, setRoomsLoaded] = useState(false);
+  const { backendURL: url, webSocketUrl: socketUrl } = useContext(PathsContext);
+  const navigate = useNavigate();
+  const socket = useWebSocket();
+
   const [roomTitle, setRoomTitle] = useState('');
 
-  async function create_room() {
-    try {
-      const response = await axios.post(`${backendURL}/rooms`, {
-        title: roomTitle !== '' ? roomTitle : undefined,
-        player1_id: current_player_id
-      }, request_config);
+  // Hooks de React Query.
+  const { data: rooms, isLoading, isError } = useFetchRooms({ url, token });
+  const { mutate: createRoomMutation } = useCreateRoom({ url, token, current_player_id });
 
-      if (response.status === 201) {
-        navigate(`/rooms/${response.data.id}`);
-      }
-    } catch (error) {
-      console.log('!!! Error al crear Room:', error);
-    }
+  function handleCreateRoom() {
+    createRoomMutation({ title: roomTitle }, {
+      onSuccess: (data) => navigate(`/rooms/${data.id}`),
+      onError: (error) => console.error('Error al crear Room:', error)
+    });
   }
 
-  useEffect(() => {
-    // const backendWebSocketURL = "ws://localhost:3000";
-    const backendWebSocketURL = "wss://y-backend-24-2.onrender.com";
 
-    // Conectar al WebSocket si no está conectado
+  useEffect(() => {
+
+    // Conectar al WebSocket si no está conectado.
     if (!webSocketService.socket || webSocketService.socket.readyState !== WebSocket.OPEN) {
-        webSocketService.connect(backendWebSocketURL);
+        webSocketService.connect(socketUrl);
     }
 
     const handleRoomCreated = (newRoom) => {
-        console.log("Nueva sala:", newRoom);
-        setRooms((prevRooms) => [...prevRooms, newRoom]);
+      console.log("Nueva sala agregada:", newRoom);
+      // ¡Aquí debemos invalidar la cache o usar un update manual!
+      // Pero eso lo dejamos para después, cuando hablemos de sincronización con React Query
     };
 
     const handleRoomUpdated = (updatedRoom) => {
-        setRooms((prevRooms) =>
-            prevRooms.map((room) => (room.id === updatedRoom.id ? updatedRoom : room))
-        );
+      // Aquí podríamos invalidar la query también o mutar el cache manualmente
     };
 
     const handleOpen = () => {
-        console.log("WebSocket connection established");
-
-        // Añadir oyentes únicos
-        webSocketService.addListener('roomCreated', handleRoomCreated);
+        webSocketService.addListener('ROOM_CREATED', handleRoomCreated);
         webSocketService.addListener('roomUpdated', handleRoomUpdated);
     };
 
@@ -69,35 +65,14 @@ const RoomModal = ({ isOpen, closeModal }) => {
         webSocketService.socket.addEventListener('open', handleOpen);
     }
 
-    // Fetch rooms solo una vez si aún no están cargadas
-    const fetchRooms = async () => {
-      if (!roomsLoaded) {
-        try {
-          const response = await axios.get(`${backendURL}/rooms`, request_config);
-          if (response.status === 200) {
-            setRooms(response.data);
-            setRoomsLoaded(true);
-          }
-        } catch (error) {
-          if (error.status === 404) {
-            setRoomsLoaded(true);
-          }
-          console.log('Error al cargar salas:', error);
-        }
-      }
-    };
-
-    fetchRooms();
-
-    // Cleanup para eliminar oyentes duplicados
     return () => {
-        webSocketService.removeListener('roomCreated', handleRoomCreated);
+        webSocketService.removeListener('ROOM_CREATED', handleRoomCreated);
         webSocketService.removeListener('roomUpdated', handleRoomUpdated);
         if (webSocketService.socket) {
             webSocketService.socket.removeEventListener('open', handleOpen);
         }
     };
-}, [backendURL, request_config]);
+}, [socket]);
 
 
 
@@ -114,7 +89,7 @@ const RoomModal = ({ isOpen, closeModal }) => {
             />
             <button
               className='button create_room_button'
-              onClick={create_room}
+              onClick={handleCreateRoom}
             >
               Crear sala
             </button>
@@ -128,9 +103,11 @@ const RoomModal = ({ isOpen, closeModal }) => {
           </button>
         </section>
         <section className="rooms_box">
-          {!roomsLoaded ? (
+          {isLoading ? (
             <h1 className='rooms_message'>Cargando salas...</h1>
-          ) : rooms.length !== 0 ? (
+          ) : isError ? (
+            <h1 className='rooms_message'>Error al cargar salas</h1>
+          ) : rooms.length > 0 ? (
             rooms.map(room_data => (
               <RoomBox key={room_data.id} room_data={room_data} />
             ))
