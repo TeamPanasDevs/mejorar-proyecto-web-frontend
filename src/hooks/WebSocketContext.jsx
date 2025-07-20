@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import socket from '../services/WebSocketManager';
 
 /* createContext y useContext.
