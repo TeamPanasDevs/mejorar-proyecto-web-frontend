@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import './RoomBox.css';
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { PathsContext } from "../../App";
-import webSocketService from "../../services/WebSocketService"; // Importa el servicio WebSocket
+import { PathsContext } from "../../../App";
+import webSocketService from "../../../services/WebSocketService"; // Importa el servicio WebSocket
 
 const RoomBox = ({ room_data }) => {
   
@@ -29,10 +29,10 @@ const RoomBox = ({ room_data }) => {
   
       if (response.status === 200) {
         // Enviar mensaje de WebSocket informando que el jugador 2 se unió.
-        webSocketService.send('joinRoom', {
-          playerId: current_player_id, // ID del jugador
-          roomId: room_data.id,        // ID de la sala
-        });
+        // webSocketService.send('joinRoom', {
+        //   playerId: current_player_id, // ID del jugador
+        //   roomId: room_data.id,        // ID de la sala
+        // });
   
         navigate(`/rooms/${room_data.id}`);
       }
@@ -74,10 +74,10 @@ const RoomBox = ({ room_data }) => {
       setPlayer2(updatedRoom.player2);
     };
     
-    webSocketService.addListener(`roomUpdated:${room_data.id}`, handleRoomUpdate);
+    // webSocketService.addListener(`roomUpdated:${room_data.id}`, handleRoomUpdate);
 
     return () => {
-      webSocketService.removeListener(`roomUpdated:${room_data.id}`, handleRoomUpdate);
+      // webSocketService.removeListener(`roomUpdated:${room_data.id}`, handleRoomUpdate);
     };
   }, [room_data]);
 
