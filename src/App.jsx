@@ -6,6 +6,10 @@ import AuthProvider from '../auth/AuthProvider'
 import webSocketService from './services/WebSocketService'; // Asegúrate de importar tu WebSocketService
 import { WebSocketProvider } from "./hooks/WebSocketContext";
 
+// Importamos la variable de entorno.
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+const webSocketUrl = import.meta.env.VITE_WEBSOCKET_URL;
+
 export const SessionContext = createContext(null);
 export const PathsContext = createContext(null);
 export const DisplayNavContext = createContext(null);
@@ -21,7 +25,6 @@ const registerPath = '/register';
 const gamePath = '/games/:id';
 const roomPath = '/rooms/:id';
 // const backendURL = 'https://www.stoncks.me';
-const backendURL = 'http://localhost:3000';
 
 function App() {
   const [userConnected, setUserConnected] = useState(false);
@@ -48,15 +51,15 @@ function App() {
     // const backendWebSocketURL = "wss://y-backend-24-2.onrender.com";
     // const backendWebSocketURL = `wss://www.stoncks.me`;
     
-    if (!webSocketService.socket || webSocketService.socket.readyState === WebSocket.CLOSED) {
-      webSocketService.connect(backendWebSocketURL);
-    }
+    // if (!webSocketService.socket || webSocketService.socket.readyState === WebSocket.CLOSED) {
+    //   webSocketService.connect(backendWebSocketURL);
+    // }
   
-    return () => {
-      if (webSocketService.socket && webSocketService.socket.readyState !== WebSocket.CLOSED) {
-        webSocketService.disconnect();
-      }
-    };
+    // return () => {
+    //   if (webSocketService.socket && webSocketService.socket.readyState !== WebSocket.CLOSED) {
+    //     webSocketService.disconnect();
+    //   }
+    // };
   }, []);
 
   const openRegisterModal = () => {
@@ -87,7 +90,8 @@ function App() {
           rulesPath,
           guidePath,
           aboutUsPath,
-          backendURL
+          backendURL,
+          webSocketUrl
         }}>
           <DisplayNavContext.Provider value={{ displayNavbar, setDisplayNavbar }}>
             <>
