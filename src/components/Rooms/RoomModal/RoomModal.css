@@ -71,6 +71,18 @@
   font-size: 3vw;
 }
 
+.input-error {
+  border: 1px solid #f87171;
+  background-color: #fef2f2;
+}
+
+.room-error {
+  color: #f87171;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+
 @media (max-width: 768px) {
   .wrapper_header {
     height: 7%;
