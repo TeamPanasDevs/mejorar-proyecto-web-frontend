@@ -55,12 +55,14 @@ class WebSocketManager {
 
 	// Registra funciones de callback para tipos específicos de mensajes.
 	on(type, callback) {
+		console.log(`ME SUSCRIBÍ EL EVENTO: ${type}`);
 		this.listeners[type] = this.listeners[type] || [];
 		this.listeners[type].push(callback);
 	}
 
 	// Elimina funciones de callback para tipos específicos de mensajes.
 	off(type, callback) {
+		console.log(`ME DESUSCRIBÍ EL EVENTO: ${type}`);
 		this.listeners[type] = (this.listeners[type] || []).filter(cb => cb !== callback);
 	}
 }
